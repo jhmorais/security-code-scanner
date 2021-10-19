@@ -36,4 +36,12 @@ The acceptables types are "json" and "txt". Example:
 go run main.go index.html json
 ```
 
+## ☕ Testing Security Code Scanner
+
+To use Security Code Scanner, follow the step:
+
+```
+go test -v
+```
+
 [⬆ back to top](#Security Code Scanner)<br>

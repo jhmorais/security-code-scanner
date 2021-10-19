@@ -74,7 +74,7 @@ func main() {
 			dataJson = addToJson(dataJson, path, line, "Cross site scripting")
 		}
 
-		sensitiveDataExposure(currentLine, path, line, dataJson)
+		dataJson = sensitiveDataExposure(currentLine, path, line, dataJson)
 		controlSQL, indexStatement, possibleLine, dataJson = sqlInjection(currentLine, controlSQL, indexStatement, path, line, possibleLine, dataJson)
 
 		line++
@@ -139,6 +139,12 @@ func sqlInjection(textLine string, control []string, indexStatement int, path st
 
 		if strings.ToLower(value) == statements[indexStatement] {
 			control = append(control, statements[indexStatement])
+			if len(control) == 5 {
+				json = addToJson(json, path, possibleLine, "SQL injection")
+				control = nil
+				indexStatement = 0
+				possibleLine = 0
+			}
 			indexStatement++
 			continue
 		}
